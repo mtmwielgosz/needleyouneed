@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.fb_login_button)
     LoginButton fbLoginButton;
     List<Feed> feedList;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,21 +66,61 @@ public class MainActivity extends AppCompatActivity {
             fbLoginButton.setVisibility(View.GONE);
         }
 
+/*
         if (!SocialMediaHelper.isLoggedInInstagram()) {
             SocialMediaHelper.logInInstagram(this);
         }
+*/
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
-    }
+                adapter.clear();
+                SocialMediaHelper.synchronizeWithSocialMedia(swipeRefreshLayout, adapter).execute();
+//                AsyncTask at = SocialMediaHelper.getInstagramRequest(feedList).execute();
+//
+//                try {
+//                    at.get(10000L, TimeUnit.MILLISECONDS);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                } catch (TimeoutException e) {
+//                    e.printStackTrace();
+//                }
+//
+//        try {
+//            at1.get(100000L, TimeUnit.MILLISECONDS);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (TimeoutException e) {
+//            e.printStackTrace();
+//        }
+
+/*                adapter.clear();
+                Collections.sort(feedList);
+                // adapter = new FeedAdapter(getBaseContext(), feedList);
+                // feedRecyclerView.setAdapter(adapter);
+                adapter.addAll(feedList);*/
 
 
-    @OnClick(R.id.message_fab)
+//                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+}
+
+
+    //@OnClick(R.id.message_fab)
     public void onViewClicked() {
 
-      feedList.clear();
+        feedList.clear();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         adapter.clear();
-        SocialMediaHelper.getFacebookRequest(feedList).executeAndWait();
+//        SocialMediaHelper.getFacebookRequest(feedList, swipeRefreshLayout, adapter).executeAndWait();
         AsyncTask at = SocialMediaHelper.getInstagramRequest(feedList).execute();
 
         try {
@@ -103,8 +145,8 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.clear();
         Collections.sort(feedList);
-       // adapter = new FeedAdapter(getBaseContext(), feedList);
-       // feedRecyclerView.setAdapter(adapter);
+        // adapter = new FeedAdapter(getBaseContext(), feedList);
+        // feedRecyclerView.setAdapter(adapter);
         adapter.addAll(feedList);
 
         //startActivity(new Intent(getApplicationContext(), SendActivity.class));

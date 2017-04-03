@@ -3,6 +3,7 @@ package other;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -20,8 +21,6 @@ import com.steelkiwi.instagramhelper.InstagramHelperConstants;
 import com.steelkiwi.instagramhelper.utils.SharedPrefUtils;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import adapters.FeedAdapter;
@@ -70,7 +70,7 @@ public final class SocialMediaHelper {
         };
     }
 
-    public static GraphRequest getFacebookRequest(final List<Feed> feedList) {
+    public static GraphRequest getFacebookRequest(final FeedAdapter adapter) {
         return new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "needleyouneed/feed?fields=full_picture,link,message,type,updated_time",
@@ -79,6 +79,9 @@ public final class SocialMediaHelper {
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
                         try {
+                            final List<Feed> feedList = new ArrayList<Feed>();
+
+
 
                             JSONObject json = new JSONObject(response.getRawResponse());
                             JSONArray data = json.getJSONArray("data");
@@ -99,6 +102,8 @@ public final class SocialMediaHelper {
                                 feedList.add(new Feed(message, oneFeed.optString("type"), "fb://facewebmodal/f?href=" + oneFeed.optString("link"),
                                         oneFeed.optString("full_picture"), date, oneFeed.optString("id")));
                             }
+                            adapter.addAll(feedList);
+
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -204,6 +209,87 @@ public final class SocialMediaHelper {
                 return null;
             }
         };
+    }
+
+    public static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia(final SwipeRefreshLayout swipeRefreshLayout, final FeedAdapter adapter) {
+        return new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void[] params) {
+                SocialMediaHelper.getFacebookRequest(adapter).executeAsync();
+                updateInsta(adapter);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void param) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        };
+    }
+
+    private static void updateInsta(FeedAdapter adapter) {
+        try {
+            final List<Feed> feedList = new ArrayList<Feed>();
+            URL url = new URL(getApplicationContext().getString(R.string.nun_recent_media_uri) + "?access_token="
+                    + SharedPrefUtils.getToken(getApplicationContext()));
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            connection.connect();
+
+            int response = connection.getResponseCode();
+            if (response == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+
+                try {
+                    JSONObject json = new JSONObject(sb.toString());
+                    JSONArray data = json.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject oneFeed = data.getJSONObject(i);
+
+                        JSONObject caption = oneFeed.getJSONObject("caption");
+                        String message = caption.optString("text");
+                        if (!SimpleHelper.isEmpty(message)) {
+                            message = "\n" + message;
+                            message += "\n";
+                        }
+
+                        Long created_time = Long.parseLong(caption.optString("created_time"));
+                        DateTime dateTime = new DateTime((created_time * 1000L));
+                        String date = DateTime.parse(dateTime.toString()).toString("dd-MM-yyyy, HH:mm:ss");
+
+                        JSONObject images = oneFeed.getJSONObject("images");
+                        JSONObject image = images.getJSONObject("standard_resolution");
+
+                        feedList.add(new Feed(message, oneFeed.optString("type"), oneFeed.optString("link"),
+                                image.optString("url"), date, oneFeed.optString("id")));
+                    }
+
+                    adapter.addAll(feedList);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
     }
 
 

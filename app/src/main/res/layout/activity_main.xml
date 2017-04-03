@@ -30,13 +30,28 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
+   <!-- <android.support.design.widget.FloatingActionButton
         android:id="@+id/message_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_dialog_email" /> -->
+
+    <com.hlab.fabrevealmenu.view.FABRevealMenu
+        android:id="@+id/fabMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        app:animateItems="true"
+        app:menuBackgroundColor="@color/cardview_dark_background"
+        app:menuDirection="left"
+        app:menuRes="@menu/menu_main"
+        app:menuTitleTextColor="@color/colorAccent"
+        app:showOverlay="false"
+        app:showTitle="true"
+        app:overlayBackground="@color/colorAccent"
+        android:visibility="visible"/>
 
     <include layout="@layout/content_main" />
 
