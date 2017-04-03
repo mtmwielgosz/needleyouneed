@@ -31,7 +31,7 @@ import entities.Feed;
 import other.SocialMediaHelper;
 
 
-public class MainActivity extends AppCompatActivity {
+public class SocialMediaActivity extends AppCompatActivity {
 
     CallbackManager callbackManager = CallbackManager.Factory.create();
     FeedAdapter adapter;
