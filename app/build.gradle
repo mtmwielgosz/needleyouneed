@@ -33,6 +33,7 @@ dependencies {
     compile 'com.facebook.android:account-kit-sdk:4.+'
     compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.android.support:cardview-v7:23.0.0'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
     compile 'com.github.JodaOrg:joda-time:v2.9.4'
     compile 'com.jakewharton:butterknife:8.5.1'
     compile  'com.github.thelester:Instagram-Helper:1.1.1'
