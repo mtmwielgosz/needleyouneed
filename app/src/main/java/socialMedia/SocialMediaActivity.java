@@ -1,4 +1,4 @@
-package activities;
+package socialMedia;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,12 +23,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import adapters.FeedAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import entities.Feed;
-import other.SocialMediaHelper;
 
 
 public class SocialMediaActivity extends AppCompatActivity {

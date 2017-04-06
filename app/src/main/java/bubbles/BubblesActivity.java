@@ -1,4 +1,4 @@
-package activities;
+package bubbles;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.example.mtmwi.needleyouneed.R;
+
+import socialMedia.SocialMediaActivity;
+
 public class BubblesActivity extends Activity {
 
     @Override

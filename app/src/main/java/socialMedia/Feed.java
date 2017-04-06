@@ -1,16 +1,14 @@
-package entities;
+package socialMedia;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.Comparator;
-
 /**
  * Created by mtmwi on 21.03.2017.
  */
 
-public class Feed implements Comparable<Feed> {
+class Feed implements Comparable<Feed> {
 
     private String message;
     private String type;
@@ -19,7 +17,7 @@ public class Feed implements Comparable<Feed> {
     private String updatedTime;
     private String id;
 
-    public Feed(String message, String type, String link, String picture, String updatedTime, String id) {
+    Feed(String message, String type, String link, String picture, String updatedTime, String id) {
         this.message = message;
         this.type = type;
         this.link = link;

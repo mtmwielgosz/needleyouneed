@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="#838181"
-    tools:context="activities.SendActivity">
+    tools:context="communicateWithUs.SendActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -1,10 +1,9 @@
-package other;
+package socialMedia;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,8 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapters.FeedAdapter;
-import entities.Feed;
+import other.SimpleHelper;
 
 import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -41,14 +39,14 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by mtmwi on 24.03.2017.
  */
 
-public final class SocialMediaHelper {
+final class SocialMediaHelper {
 
-    public static boolean isLoggedInFacebook() {
+    static boolean isLoggedInFacebook() {
 
         return AccessToken.getCurrentAccessToken() != null;
     }
 
-    public static FacebookCallback<LoginResult> getFacebookCallback(final View view) {
+    static FacebookCallback<LoginResult> getFacebookCallback(final View view) {
         return new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -70,7 +68,7 @@ public final class SocialMediaHelper {
         };
     }
 
-    public static GraphRequest getFacebookRequest(final FeedAdapter adapter) {
+    static GraphRequest getFacebookRequest(final FeedAdapter adapter) {
         return new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "needleyouneed/feed?fields=full_picture,link,message,type,updated_time",
@@ -113,11 +111,11 @@ public final class SocialMediaHelper {
         );
     }
 
-    public static boolean isLoggedInInstagram() {
+    static boolean isLoggedInInstagram() {
         return SimpleHelper.isEmpty(SharedPrefUtils.getToken(getApplicationContext()));
     }
 
-    public static void logInInstagram(Activity activity) {
+    static void logInInstagram(Activity activity) {
 
         String scope = "basic+public_content";
 
@@ -130,7 +128,7 @@ public final class SocialMediaHelper {
         instagramHelper.loginFromActivity(activity);
     }
 
-    public static void executeInstagramOnResult(int requestCode, int resultCode) {
+    static void executeInstagramOnResult(int requestCode, int resultCode) {
 
         if (requestCode == InstagramHelperConstants.INSTA_LOGIN) {
             if (resultCode == RESULT_OK) {
@@ -143,7 +141,7 @@ public final class SocialMediaHelper {
         }
     }
 
-    public static AsyncTask<Void, Void, Void> getInstagramRequest(final List<Feed> feedList) {
+    static AsyncTask<Void, Void, Void> getInstagramRequest(final List<Feed> feedList) {
         return new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -211,7 +209,7 @@ public final class SocialMediaHelper {
         };
     }
 
-    public static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia(final SwipeRefreshLayout swipeRefreshLayout, final FeedAdapter adapter) {
+    static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia(final SwipeRefreshLayout swipeRefreshLayout, final FeedAdapter adapter) {
         return new AsyncTask<Void, Void, Void>() {
 
             @Override

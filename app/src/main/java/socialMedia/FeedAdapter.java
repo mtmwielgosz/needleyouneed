@@ -1,4 +1,4 @@
-package adapters;
+package socialMedia;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import entities.Feed;
 import other.SimpleHelper;
 
 import com.example.mtmwi.needleyouneed.R;
@@ -28,12 +27,12 @@ import java.util.List;
  * Created by mtmwi on 21.03.2017.
  */
 
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
+class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<Feed> feedList;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView updatedTime;
         public TextView message;
         public ImageView picture;
