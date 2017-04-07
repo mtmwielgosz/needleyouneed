@@ -22,6 +22,7 @@ public class BubblesActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent( v.getContext(), SocialMediaActivity.class );
                 startActivity( intent );
+                overridePendingTransition( R.anim.out, 0);
             }
         });
     }
