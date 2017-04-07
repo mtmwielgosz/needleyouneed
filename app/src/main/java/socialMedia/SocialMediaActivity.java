@@ -33,8 +33,6 @@ public class SocialMediaActivity extends AppCompatActivity {
     FeedAdapter adapter;
     @BindView(R.id.feed_recycler_view)
     RecyclerView feedRecyclerView;
-    @BindView(R.id.fb_login_button)
-    LoginButton fbLoginButton;
     List<Feed> feedList;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -54,16 +52,8 @@ public class SocialMediaActivity extends AppCompatActivity {
         adapter = new FeedAdapter(getBaseContext(), feedList);
         feedRecyclerView.setAdapter(adapter);
 
-
-        if (!SocialMediaHelper.isLoggedInFacebook()) {
-            fbLoginButton.setVisibility(View.VISIBLE);
-            fbLoginButton.registerCallback(callbackManager, SocialMediaHelper.getFacebookCallback(fbLoginButton));
-        } else {
-            fbLoginButton.setVisibility(View.GONE);
-        }
-
 /*
-        if (!SocialMediaHelper.isLoggedInInstagram()) {
+        if (!SocialMediaHelper.isLoggedInInstagram()) { // TODO log in Instagram?
             SocialMediaHelper.logInInstagram(this);
         }
 */
@@ -73,36 +63,6 @@ public class SocialMediaActivity extends AppCompatActivity {
 
                 adapter.clear();
                 SocialMediaHelper.synchronizeWithSocialMedia(swipeRefreshLayout, adapter).execute();
-//                AsyncTask at = SocialMediaHelper.getInstagramRequest(feedList).execute();
-//
-//                try {
-//                    at.get(10000L, TimeUnit.MILLISECONDS);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                } catch (TimeoutException e) {
-//                    e.printStackTrace();
-//                }
-//
-//        try {
-//            at1.get(100000L, TimeUnit.MILLISECONDS);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (TimeoutException e) {
-//            e.printStackTrace();
-//        }
-
-/*                adapter.clear();
-                Collections.sort(feedList);
-                // adapter = new FeedAdapter(getBaseContext(), feedList);
-                // feedRecyclerView.setAdapter(adapter);
-                adapter.addAll(feedList);*/
-
-
-//                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -112,40 +72,8 @@ public class SocialMediaActivity extends AppCompatActivity {
     //@OnClick(R.id.message_fab)
     public void onViewClicked() {
 
-        feedList.clear();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        adapter.clear();
-//        SocialMediaHelper.getFacebookRequest(feedList, swipeRefreshLayout, adapter).executeAndWait();
-        AsyncTask at = SocialMediaHelper.getInstagramRequest(feedList).execute();
 
-        try {
-            at.get(10000L, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-//
-//        try {
-//            at1.get(100000L, TimeUnit.MILLISECONDS);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (TimeoutException e) {
-//            e.printStackTrace();
-//        }
-
-        adapter.clear();
-        Collections.sort(feedList);
-        // adapter = new FeedAdapter(getBaseContext(), feedList);
-        // feedRecyclerView.setAdapter(adapter);
-        adapter.addAll(feedList);
-
-        //startActivity(new Intent(getApplicationContext(), SendActivity.class));
+        // TODO open Bubbles!
     }
 
     @Override

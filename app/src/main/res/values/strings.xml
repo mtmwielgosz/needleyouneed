@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">needleyouneed</string>
     <string name="facebook_app_id">1747122368951836</string>
+    <string name="facebook_app_secret">cf920a568ad141250f9fa8ff48ba4f9a</string>
     <string name="fb_login_protocol_scheme">fb1747122368951836</string>
     <string name="fb_client_token">96cd35038640525d751135a1b987bc32</string>
-    <string name="instagram_client_id">fa6a1ee086a741f1ae57f379b8cab2b6</string>
-    <string name="instagram_redirect_uri">http://needleyouneed.example.com/someresource</string>
-    <string name="nun_recent_media_uri">https://api.instagram.com/v1/users/self/media/recent/</string>
+    <string name="fb_nun_recent_media_uri">https://graph.facebook.com/needleyouneed/feed?fields=full_picture,link,message,type,updated_time</string>
     <string name="fb_msg_succeed">Zalogowano do facebooka :)</string>
     <string name="fb_msg_unsuceed">Logowanie do facebooka nieudane.</string>
+
+    <string name="instagram_client_id">fa6a1ee086a741f1ae57f379b8cab2b6</string>
+    <string name="instagram_redirect_uri">http://needleyouneed.example.com/someresource</string>
+    <string name="insta_nun_recent_media_uri">https://api.instagram.com/v1/users/4625597156/media/recent/</string>
     <string name="insta_msg_succeed">Zalogowano do instagrama :)</string>
     <string name="insta_msg_unsuceed">Logowanie do instagrama nieudane.</string>
 
