@@ -1,36 +1,11 @@
 package socialMedia;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.mtmwi.needleyouneed.R;
-import com.facebook.AccessToken;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginResult;
-import com.steelkiwi.instagramhelper.InstagramHelper;
 import com.steelkiwi.instagramhelper.InstagramHelperConstants;
-import com.steelkiwi.instagramhelper.utils.SharedPrefUtils;
-
-import org.joda.time.DateTime;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import other.SimpleHelper;
 
 import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -41,7 +16,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 final class SocialMediaHelper {
 
-    static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia(final SwipeRefreshLayout swipeRefreshLayout, final FeedAdapter adapter) {
+    static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia(final SwipeRefreshLayout swipeRefreshLayout) {
         return new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -51,8 +26,7 @@ final class SocialMediaHelper {
 
             @Override
             protected Void doInBackground(Void[] params) {
-                new FacebookSynchronizer().synchronizeData(adapter);
-                new InstagramSynchronizer().synchronizeData(adapter);
+                FeedAgregate.INSTANCE.LoadFeedsFromMedia();
                 return null;
             }
 

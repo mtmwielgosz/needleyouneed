@@ -8,14 +8,10 @@ package socialMedia;
         import org.json.JSONArray;
         import org.json.JSONObject;
 
-        import java.io.BufferedReader;
-        import java.io.InputStreamReader;
-        import java.net.HttpURLConnection;
-        import java.net.URL;
         import java.util.ArrayList;
         import java.util.List;
 
-        import other.SimpleHelper;
+        import needleYouNeed.other.SimpleHelper;
 
         import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
@@ -38,9 +34,9 @@ public class InstagramSynchronizer implements IMediaSynchronizer {
     }
 
     @Override
-    public void synchronizeData(FeedAdapter adapter) {
+    public List<Feed> synchronizeData() {
+        final List<Feed> feedList = new ArrayList<Feed>();
         try {
-            final List<Feed> feedList = new ArrayList<Feed>();
 
             JSONObject json = new JSONObject(SimpleHelper.getJSONResult(FacebookSdk.getApplicationContext().getString(R.string.insta_nun_recent_media_uri) + "?access_token="
                     + getAccessToken()));
@@ -61,11 +57,11 @@ public class InstagramSynchronizer implements IMediaSynchronizer {
                         image.optString("url"), date, oneFeed.optString("id")));
             }
 
-            adapter.addAll(feedList);
-
         } catch (Exception e) {
 
             e.printStackTrace();
+        }finally {
+            return feedList;
         }
     }
 }

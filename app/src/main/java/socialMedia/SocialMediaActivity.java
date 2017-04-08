@@ -55,7 +55,7 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        feedList = new ArrayList<Feed>();
+        feedList = FeedAgregate.INSTANCE.getFeeds();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getBaseContext());
         feedRecyclerView.setLayoutManager(mLayoutManager);
         feedRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -75,7 +75,7 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
             public void onRefresh() {
 
                 adapter.clear();
-                SocialMediaHelper.synchronizeWithSocialMedia(swipeRefreshLayout, adapter).execute();
+                SocialMediaHelper.synchronizeWithSocialMedia(swipeRefreshLayout).execute();
             }
         });
 

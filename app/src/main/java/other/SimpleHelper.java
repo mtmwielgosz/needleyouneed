@@ -5,18 +5,12 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
 
-import com.example.mtmwi.needleyouneed.R;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by mtmwi on 24.03.2017.
