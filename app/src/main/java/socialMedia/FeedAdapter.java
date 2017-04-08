@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import needleYouNeed.other.SimpleHelper;
+import other.SimpleHelper;
 
 import com.example.mtmwi.needleyouneed.R;
 

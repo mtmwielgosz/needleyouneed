@@ -11,7 +11,7 @@ package socialMedia;
         import java.util.ArrayList;
         import java.util.List;
 
-        import needleYouNeed.other.SimpleHelper;
+        import other.SimpleHelper;
 
         import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 

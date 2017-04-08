@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import needleYouNeed.other.SimpleHelper;
+import other.SimpleHelper;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
