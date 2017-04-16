@@ -19,7 +19,7 @@
         app:srcCompat="@android:drawable/btn_star" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/about_us"
+        android:id="@+id/write_to_us"
         android:layout_width="97dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center"

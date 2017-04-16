@@ -23,19 +23,6 @@ public final class SimpleHelper {
         return s == null || s.equals("");
     }
 
-    public static final void promptSpeechInput(Activity activity, int req) {
-
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
-        try {
-            activity.startActivityForResult(intent, req);
-        } catch (ActivityNotFoundException a) {
-            a.printStackTrace();
-        }
-    }
-
     public static final String getJSONResult(String query) throws MalformedURLException, IOException {
 
         HttpURLConnection connection = (HttpURLConnection) (new URL(query)).openConnection();

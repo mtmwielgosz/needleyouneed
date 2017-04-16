@@ -6,6 +6,7 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,11 +34,16 @@ public class SendActivity extends AppCompatActivity implements TextToSpeech.OnIn
     EditText messageText;
     private int MESSAGE_REQ = 111;
 
+    private Speeker speeker;
+    private MailSender mailSender;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
         ButterKnife.bind(this);
+        speeker = new Speeker(this);
+        mailSender = new MailSender(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,9 +60,10 @@ public class SendActivity extends AppCompatActivity implements TextToSpeech.OnIn
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.record_button:
-                SimpleHelper.promptSpeechInput(this, MESSAGE_REQ);
+                speeker.promptSpeechInput(MESSAGE_REQ);
                 break;
             case R.id.send_button:
+                mailSender.send();
                 break;
         }
     }
