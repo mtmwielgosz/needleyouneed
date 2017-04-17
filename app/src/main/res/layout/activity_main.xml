@@ -37,7 +37,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/com_accountkit_email" />
+        android:src="@drawable/menu_button" />
 
     <com.github.fabtransitionactivity.SheetLayout
         android:id="@+id/bottom_sheet"

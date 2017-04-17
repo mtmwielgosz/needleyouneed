@@ -8,63 +8,166 @@
     android:weightSum="1"
     android:background="#FFFFFF">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/social_media"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="center|top"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="45dp"
-        android:layout_weight="0.15"
-        app:srcCompat="@android:drawable/btn_star" />
+        android:layout_marginTop="20dp" >
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/write_to_us"
-        android:layout_width="97dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_weight="0.15"
-        app:srcCompat="@android:drawable/btn_star" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/about_us"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@android:color/transparent"
+            app:backgroundTint="#7b6496"/>
 
-    <ImageView
-        android:layout_width="265dp"
-        android:layout_height="60dp"
-        android:layout_gravity="left"
-        android:id="@+id/logo_imageView"
-        android:background="@drawable/needle"
-        android:layout_marginLeft="125dp"
-        tools:ignore="ContentDescription,RtlHardcoded"
-        android:contentDescription="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:text="O nas"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+    </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/needles"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/social_media"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                app:backgroundTint="#7e6490"
+                android:src="@android:color/transparent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="10dp"
+                android:text="Social\nMedia"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textSize="26dp" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.69" />
+
+            <ImageView
+                android:id="@+id/logo_imageView"
+                android:layout_width="215dp"
+                android:layout_height="85dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.11"
+                android:background="@drawable/needle_short"
+                android:contentDescription=""
+                tools:ignore="ContentDescription,RtlHardcoded" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="right|center"
         android:layout_marginRight="30dp"
-        app:srcCompat="@android:drawable/btn_star"
-        android:layout_weight="0.15" />
+        android:layout_marginTop="10dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/partners"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/needles"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:backgroundTint="#82648a"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:text="Kocyki"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_gravity="left|center"
         android:layout_marginLeft="20dp"
-        app:srcCompat="@android:drawable/btn_star"
-        android:layout_weight="0.15"
-        />
+        android:layout_marginTop="10dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/mapa"
-        android:layout_width="77dp"
-        android:layout_height="wrap_content"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/map"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:backgroundTint="#866484"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:text="Mapa"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="26dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="78dp"
+        android:layout_height="78dp"
         android:layout_gravity="right|bottom"
         android:layout_marginRight="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.15"
-        app:srcCompat="@android:drawable/btn_star" />
+        android:layout_marginTop="10dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/write_to_us"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            app:backgroundTint="#8e6479"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:text="Kontakt"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+    </FrameLayout>
 
 </LinearLayout>
