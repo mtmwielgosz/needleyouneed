@@ -54,8 +54,12 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        feedList = FeedAgregate.INSTANCE.getFeeds();
+        if(!noFeedsAvalaible()) {
+            feedList = FeedAgregate.INSTANCE.getFeeds();
+        }else{
+            SocialMediaHelper.synchronizeWithSocialMedia();
+            feedList = FeedAgregate.INSTANCE.getFeeds();
+        }
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getBaseContext());
         feedRecyclerView.setLayoutManager(mLayoutManager);
         feedRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -80,6 +84,10 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
         });
 
 }
+
+    private boolean noFeedsAvalaible() {
+        return FeedAgregate.INSTANCE.getFeeds().isEmpty();
+    }
 
 
     @OnClick(R.id.bubbles_menu)

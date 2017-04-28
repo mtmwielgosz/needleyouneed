@@ -36,6 +36,25 @@ final class SocialMediaHelper {
             }
         };
     }
+    static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia() {
+        return new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void[] params) {
+                FeedAgregate.INSTANCE.LoadFeedsFromMedia();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void param) {
+            }
+        };
+    }
 
     static void executeInstagramOnResult(int requestCode, int resultCode) { // TODO no needed when no logging in Instagram
 

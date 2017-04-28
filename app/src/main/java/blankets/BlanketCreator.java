@@ -1,0 +1,5 @@
+package blankets;
+
+class BlanketCreator {
+
+}

@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import other.SimpleHelper;
-
 import com.example.mtmwi.needleyouneed.R;
 
 import java.io.InputStream;
@@ -58,7 +56,7 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
 
         List<Feed> result = new ArrayList<Feed>();
         for(Feed feed : feedList) {
-            if(feed != null && !SimpleHelper.isEmpty(feed.getPicture())) {
+            if(feed != null && !JsonConverter.isEmpty(feed.getPicture())) {
                 result.add(feed);
             }
         }

@@ -1,29 +1,23 @@
-package other;
-
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.speech.RecognizerIntent;
+package socialMedia;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
  * Created by mtmwi on 24.03.2017.
  */
 
-public final class SimpleHelper {
+final class JsonConverter {
 
-    public static final boolean isEmpty(String s) {
+    static final boolean isEmpty(String s) {
 
         return s == null || s.equals("");
     }
 
-    public static final String getJSONResult(String query) throws MalformedURLException, IOException {
+    static final String getJSONResult(String query) throws IOException {
 
         HttpURLConnection connection = (HttpURLConnection) (new URL(query)).openConnection();
         connection.setRequestMethod("GET");
@@ -41,9 +35,9 @@ public final class SimpleHelper {
         return result;
     }
 
-    public static final String addEmptyLines(String line) {
+    static final String addEmptyLines(String line) {
 
-        if (!SimpleHelper.isEmpty(line)) {
+        if (!isEmpty(line)) {
             line = "\n" + line + "\n";
         }
 

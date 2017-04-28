@@ -17,7 +17,7 @@ public class BubblesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bubbles_view);
-
+        
         FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.social_media);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

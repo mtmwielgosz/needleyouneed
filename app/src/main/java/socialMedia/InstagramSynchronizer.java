@@ -11,15 +11,13 @@ package socialMedia;
         import java.util.ArrayList;
         import java.util.List;
 
-        import other.SimpleHelper;
-
         import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 /**
  * Created by mtmwi on 06.04.2017.
  */
 
-public class InstagramSynchronizer implements IMediaSynchronizer {
+class InstagramSynchronizer implements IMediaSynchronizer {
 
     private String instagramAccessToken = SharedPrefUtils.getToken(getApplicationContext());
 
@@ -38,7 +36,7 @@ public class InstagramSynchronizer implements IMediaSynchronizer {
         final List<Feed> feedList = new ArrayList<Feed>();
         try {
 
-            JSONObject json = new JSONObject(SimpleHelper.getJSONResult(FacebookSdk.getApplicationContext().getString(R.string.insta_nun_recent_media_uri) + "?access_token="
+            JSONObject json = new JSONObject(JsonConverter.getJSONResult(FacebookSdk.getApplicationContext().getString(R.string.insta_nun_recent_media_uri) + "?access_token="
                     + getAccessToken()));
             JSONArray data = json.getJSONArray("data");
             for (int i = 0; i < data.length(); i++) {
@@ -53,15 +51,14 @@ public class InstagramSynchronizer implements IMediaSynchronizer {
                 JSONObject images = oneFeed.getJSONObject("images");
                 JSONObject image = images.getJSONObject("standard_resolution");
 
-                feedList.add(new Feed(SimpleHelper.addEmptyLines(caption.optString("text")), oneFeed.optString("type"), oneFeed.optString("link"),
+                feedList.add(new Feed(JsonConverter.addEmptyLines(caption.optString("text")), oneFeed.optString("type"), oneFeed.optString("link"),
                         image.optString("url"), date, oneFeed.optString("id")));
             }
 
         } catch (Exception e) {
 
             e.printStackTrace();
-        }finally {
-            return feedList;
         }
+        return feedList;
     }
 }

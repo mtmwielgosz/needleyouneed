@@ -6,7 +6,6 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import other.SimpleHelper;
 
 public class SendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
@@ -63,7 +61,7 @@ public class SendActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 speeker.promptSpeechInput(MESSAGE_REQ);
                 break;
             case R.id.send_button:
-                mailSender.send();
+                mailSender.send(messageText.getText().toString(),titleSpinner.getSelectedItem().toString());
                 break;
         }
     }
