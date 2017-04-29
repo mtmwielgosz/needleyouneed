@@ -10,6 +10,7 @@ import com.example.mtmwi.needleyouneed.R;
 
 import communicateWithUs.SendActivity;
 import socialMedia.SocialMediaActivity;
+import socialMedia.SocialMediaHelper;
 
 public class BubblesActivity extends Activity {
 
@@ -17,7 +18,7 @@ public class BubblesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bubbles_view);
-        
+        SocialMediaHelper.synchronizeWithSocialMedia().execute();
         FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.social_media);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

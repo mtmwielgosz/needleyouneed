@@ -14,7 +14,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by mtmwi on 24.03.2017.
  */
 
-final class SocialMediaHelper {
+//TODO zmienmy ta nazwe... ewidetnie klasa ma zwiazek z watkami do synchronizacji. Moze Fabryka watkow? Moze Budowniczy watkow? Ale nie helpler.
+public final class SocialMediaHelper {
 
     static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia(final SwipeRefreshLayout swipeRefreshLayout) {
         return new AsyncTask<Void, Void, Void>() {
@@ -36,7 +37,8 @@ final class SocialMediaHelper {
             }
         };
     }
-    static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia() {
+
+    public static AsyncTask<Void, Void, Void> synchronizeWithSocialMedia() {
         return new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -68,5 +70,4 @@ final class SocialMediaHelper {
             }
         }
     }
-
 }

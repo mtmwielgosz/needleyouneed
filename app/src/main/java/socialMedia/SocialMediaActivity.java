@@ -80,6 +80,8 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
 
                 adapter.clear();
                 SocialMediaHelper.synchronizeWithSocialMedia(swipeRefreshLayout).execute();
+                feedList = FeedAgregate.INSTANCE.getFeeds();
+                adapter = new FeedAdapter(getBaseContext(), feedList);
             }
         });
 
