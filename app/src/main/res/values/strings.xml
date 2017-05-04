@@ -10,7 +10,7 @@
 
     <string name="instagram_client_id">fa6a1ee086a741f1ae57f379b8cab2b6</string>
     <string name="instagram_redirect_uri">http://needleyouneed.example.com/someresource</string>
-    <string name="insta_nun_recent_media_uri">https://api.instagram.com/v1/users/4625597156/media/recent/</string>
+    <string name="insta_nun_recent_media_uri">https://igapi.ga/needleyouneed/media/</string>
     <string name="insta_msg_succeed">Zalogowano do instagrama :)</string>
     <string name="insta_msg_unsuceed">Logowanie do instagrama nieudane.</string>
 

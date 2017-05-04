@@ -1,5 +1,7 @@
 package socialMedia;
 
+        import android.util.Log;
+
         import com.example.mtmwi.needleyouneed.R;
         import com.facebook.FacebookSdk;
         import com.steelkiwi.instagramhelper.utils.SharedPrefUtils;
@@ -19,7 +21,7 @@ package socialMedia;
 
 class InstagramSynchronizer implements IMediaSynchronizer {
 
-    private String instagramAccessToken = SharedPrefUtils.getToken(getApplicationContext());
+    private String instagramAccessToken = "4315956280.1677ed0.937ed65813b2449fb442479ea349ec92"; //SharedPrefUtils.getToken(getApplicationContext());
 
     @Override
     public String getAccessToken() {
@@ -36,9 +38,9 @@ class InstagramSynchronizer implements IMediaSynchronizer {
         final List<Feed> feedList = new ArrayList<Feed>();
         try {
 
-            JSONObject json = new JSONObject(JsonConverter.getJSONResult(FacebookSdk.getApplicationContext().getString(R.string.insta_nun_recent_media_uri) + "?access_token="
-                    + getAccessToken()));
-            JSONArray data = json.getJSONArray("data");
+            JSONObject json = new JSONObject(JsonConverter.getJSONResult(FacebookSdk.getApplicationContext().getString(R.string.insta_nun_recent_media_uri)));
+            JSONArray data = json.getJSONArray("items");
+            Log.d("ERRR", data.toString());
             for (int i = 0; i < data.length(); i++) {
                 JSONObject oneFeed = data.getJSONObject(i);
 
