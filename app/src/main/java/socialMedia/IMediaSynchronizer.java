@@ -8,7 +8,5 @@ import java.util.List;
 
 public interface IMediaSynchronizer {
 
-    String getAccessToken();
-    void setAccessToken(String token);
     List<Feed> synchronizeData();
 }

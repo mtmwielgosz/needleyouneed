@@ -19,14 +19,8 @@ class FacebookSynchronizer implements IMediaSynchronizer {
 
     private static String facebookAccessToken =  "1747122368951836|OjzCmZompznsqin_oNs7wlq05go";
 
-    @Override
     public String getAccessToken() {
         return facebookAccessToken;
-    }
-
-    @Override
-    public void setAccessToken(String accessToken) {
-        facebookAccessToken = accessToken;
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 
 import com.example.mtmwi.needleyouneed.R;
 import com.facebook.CallbackManager;
@@ -37,6 +43,8 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
 
     private int REQUEST_CODE_EXPAND_FAB = 5555;
     FeedAdapter adapter;
+    Toolbar toolbar;
+
     @BindView(R.id.feed_recycler_view)
     RecyclerView feedRecyclerView;
     List<Feed> feedList;
@@ -52,15 +60,17 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         if(!noFeedsAvalaible()) {
             feedList = FeedAgregate.INSTANCE.getFeeds();
-        }else{
+        } else {
             SocialMediaHelper.synchronizeWithSocialMedia();
             feedList = FeedAgregate.INSTANCE.getFeeds();
         }
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getBaseContext());
+
+        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getBaseContext());
         feedRecyclerView.setLayoutManager(mLayoutManager);
         feedRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new FeedAdapter(getBaseContext(), feedList);
@@ -69,11 +79,6 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
         sheetLayout.setFab(fab);
         sheetLayout.setFabAnimationEndListener(this);
 
-/*
-        if (!SocialMediaHelper.isLoggedInInstagram()) { // TODO log in Instagram?
-            SocialMediaHelper.logInInstagram(this);
-        }
-*/
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -81,11 +86,38 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
                 adapter.clear();
                 SocialMediaHelper.synchronizeWithSocialMedia(swipeRefreshLayout).execute();
                 feedList = FeedAgregate.INSTANCE.getFeeds();
-                adapter = new FeedAdapter(getBaseContext(), feedList);
+                adapter.addAll(feedList);
+
             }
         });
 
-}
+        feedRecyclerView.setOnScrollListener(new HidingScrollListener() {
+            @Override
+            public void onHide() {
+                hideViews();
+            }
+            @Override
+            public void onShow() {
+                showViews();
+            }
+        });
+    }
+
+    private void hideViews() {
+
+        toolbar.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.fade_out));
+
+        ViewGroup.LayoutParams lp = fab.getLayoutParams();
+        int fabBottomMargin = lp.height;
+        fab.animate().translationY(fab.getHeight() + fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
+    }
+
+    private void showViews() {
+        toolbar.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.fade_in));
+        fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+    }
 
     private boolean noFeedsAvalaible() {
         return FeedAgregate.INSTANCE.getFeeds().isEmpty();
@@ -121,7 +153,6 @@ public class SocialMediaActivity extends AppCompatActivity implements SheetLayou
             getSupportActionBar().show();
         }
 
-        SocialMediaHelper.executeInstagramOnResult(requestCode, resultCode);
     }
 
     @Override

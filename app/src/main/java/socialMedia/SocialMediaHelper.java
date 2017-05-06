@@ -57,17 +57,4 @@ public final class SocialMediaHelper {
             }
         };
     }
-
-    static void executeInstagramOnResult(int requestCode, int resultCode) { // TODO no needed when no logging in Instagram
-
-        if (requestCode == InstagramHelperConstants.INSTA_LOGIN) {
-            if (resultCode == RESULT_OK) {
-
-                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.insta_msg_succeed), Toast.LENGTH_LONG).show();
-            } else {
-
-                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.insta_msg_unsuceed), Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }

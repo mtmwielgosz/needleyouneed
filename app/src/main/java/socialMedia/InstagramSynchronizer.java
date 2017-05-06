@@ -1,19 +1,15 @@
 package socialMedia;
 
-        import android.util.Log;
+import com.example.mtmwi.needleyouneed.R;
 
-        import com.example.mtmwi.needleyouneed.R;
-        import com.facebook.FacebookSdk;
-        import com.steelkiwi.instagramhelper.utils.SharedPrefUtils;
+import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-        import org.joda.time.DateTime;
-        import org.json.JSONArray;
-        import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
+import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 /**
  * Created by mtmwi on 06.04.2017.
@@ -21,26 +17,13 @@ package socialMedia;
 
 class InstagramSynchronizer implements IMediaSynchronizer {
 
-    private String instagramAccessToken = "4315956280.1677ed0.937ed65813b2449fb442479ea349ec92"; //SharedPrefUtils.getToken(getApplicationContext());
-
-    @Override
-    public String getAccessToken() {
-        return instagramAccessToken;
-    }
-
-    @Override
-    public void setAccessToken(String token) {
-        instagramAccessToken = token;
-    }
-
     @Override
     public List<Feed> synchronizeData() {
         final List<Feed> feedList = new ArrayList<Feed>();
         try {
 
-            JSONObject json = new JSONObject(JsonConverter.getJSONResult(FacebookSdk.getApplicationContext().getString(R.string.insta_nun_recent_media_uri)));
+            JSONObject json = new JSONObject(JsonConverter.getJSONResult(getApplicationContext().getString(R.string.insta_nun_recent_media_uri)));
             JSONArray data = json.getJSONArray("items");
-            Log.d("ERRR", data.toString());
             for (int i = 0; i < data.length(); i++) {
                 JSONObject oneFeed = data.getJSONObject(i);
 

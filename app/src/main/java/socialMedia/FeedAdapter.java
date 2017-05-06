@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -46,10 +47,7 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
     public FeedAdapter(Context mContext, List<Feed> feedList) {
         this.mContext = mContext;
         this.feedList = getFeedsWithPictures(feedList);
-    }
-
-    public void setFeeds(List<Feed> feedList) {
-        this.feedList = getFeedsWithPictures(feedList);
+        Collections.sort(this.feedList);
     }
 
     private List<Feed> getFeedsWithPictures(List<Feed> feedList) {
@@ -92,6 +90,12 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
 
         holder.message.setOnClickListener(openFbLink);
         holder.picture.setOnClickListener(openFbLink);
+
+        if(position % 2 == 0) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#bacdff"));
+        } else {
+            holder.itemView.setBackgroundColor(Color.parseColor("#bacdff"));
+        }
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
