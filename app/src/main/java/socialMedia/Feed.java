@@ -98,4 +98,13 @@ class Feed implements Comparable<Feed> {
 
         return time2.compareTo(time1);
     }
+
+    public boolean isFaceBook() {
+        return link.contains("facebook");
+    }
+
+    public String getBrowserAddress() {
+        String[] parts = link.split("href=");
+        return parts[1];
+    }
 }

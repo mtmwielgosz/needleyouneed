@@ -2,6 +2,8 @@ package socialMedia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -82,9 +84,11 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
         View.OnClickListener openFbLink = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent showPage = new Intent(Intent.ACTION_VIEW, Uri.parse(feed.getLink()));
-                showPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(showPage);
+                if(feed.isFaceBook()){
+                    openFaceBook(feed);
+                }else{
+                    openInstagram(feed);
+                }
             }
         };
 
@@ -96,6 +100,30 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
         } else {
             holder.itemView.setBackgroundColor(Color.parseColor("#bacdff"));
         }
+    }
+
+    private void openInstagram(Feed feed) {
+        Intent showPage = new Intent(Intent.ACTION_VIEW, Uri.parse(feed.getLink()));
+        showPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(showPage);
+    }
+
+    private void openFaceBook(Feed feed) {
+        ApplicationInfo applicationInfo = null;
+        try {
+            applicationInfo = mContext.getPackageManager().getApplicationInfo("com.facebook.katana", 0);
+        }catch (Exception e){}
+
+        if (applicationInfo != null && !applicationInfo.enabled) {
+            Intent showPage = new Intent(Intent.ACTION_VIEW, Uri.parse(feed.getLink()));
+            showPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(showPage);
+        }else{
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(feed.getBrowserAddress()));
+            browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(browserIntent);
+        }
+
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
